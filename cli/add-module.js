@@ -7,6 +7,10 @@ if (args.length) {
 
 	tiappDir(__dirname).then(rootPath => {
 
+		if (!rootPath) {
+			console.error('Could not find tiapp.xml in directory tree: ' + __dirname);
+			process.exit(1);
+		}
 		console.log('Adding module ' + args[0] + ' to ' + path.join(rootPath, 'tiapp.xml'));
 		var tiapp = require('../lib/tiapp-xml').load(path.join(rootPath, 'tiapp.xml'));
 
