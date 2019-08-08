@@ -30,6 +30,7 @@ if (!args.length && process.env.npm_package_name) {
 }
 
 function removeModule(name, platform) {
+	console.error('removing module.  name: ' + name + ' platform: ' + platform);
 	if (platform) {
 		tiapp.removeModule(name, platform);
 	} else {
