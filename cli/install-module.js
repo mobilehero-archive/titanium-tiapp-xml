@@ -18,19 +18,10 @@ if (!root) {
 var tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
 
 if (!args.length && process.env.npm_package_name) {
-	var platforms = process.env.npm_package_titanium_platform;
-
-	if (!platforms) {
-		console.error('titanium.platform not defined in package.json for package: ' + process.env.npm_package_name);
-		process.exit(1);
-	}
-	removeModule(process.env.npm_package_name);
-
-	if (!Array.isArray(platforms)) {
-		platforms = [ platforms ];
-	}
+	var platforms = getPlatforms();
 
 	platforms.forEach(platform => {
+		removeModule(process.env.npm_package_name, platform);
 		addModule(process.env.npm_package_name, platform, process.env.npm_package_version);
 	});
 
@@ -55,4 +46,20 @@ function removeModule(name, platform) {
 	} else {
 		tiapp.removeModule(name);
 	}
+}
+
+function getPlatforms() {
+
+	var platforms = [];
+
+	process.env.npm_package_titanium_platform_0 && platforms.push(process.env.npm_package_titanium_platform_0);
+	process.env.npm_package_titanium_platform_1 && platforms.push(process.env.npm_package_titanium_platform_1);
+	process.env.npm_package_titanium_platform_2 && platforms.push(process.env.npm_package_titanium_platform_2);
+
+	if (!platforms.length) {
+		console.error('titanium.platform not defined in package.json for package: ' + process.env.npm_package_name);
+		process.exit(1);
+	}
+
+	return platforms;
 }
