@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "0.5.1",
+	"version": "0.6.0",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Fork from tonylukasavage",
 	"license": "MIT",
 	"author": {
