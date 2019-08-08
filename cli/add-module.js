@@ -6,8 +6,8 @@ if (args.length) {
 	var tiappDir = require('../lib/tiapp-dir');
 
 	tiappDir(__dirname).then(rootPath => {
-		console.log(rootPath);
 
+		console.log('Adding module ' + args[0] + ' to ' + path.join(rootPath, 'tiapp.xml'));
 		var tiapp = require('../lib/tiapp-xml').load(path.join(rootPath, 'tiapp.xml'));
 
 		switch (args.length) {
