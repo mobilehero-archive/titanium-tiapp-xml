@@ -17,11 +17,11 @@ if (args.length) {
 				break;
 
 			case 2:
-				tiapp.setModule(args[0], args[1]);
+				tiapp.setModule(args[0], { platform: args[1]  });
 				break;
 
 			default:
-				tiapp.setModule(args[0], args[1], args[2]);
+				tiapp.setModule(args[0], { platform: args[1], version: args[2]  });
 				break;
 
 		}
