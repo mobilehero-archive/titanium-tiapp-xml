@@ -1,4 +1,44 @@
-# tiapp.xml [![Build Status](https://travis-ci.org/tonylukasavage/tiapp.xml.svg?branch=master)](https://travis-ci.org/tonylukasavage/tiapp.xml) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# @titanium/tiapp-xml
+
+[![@titanium/tiapp-xml](https://img.shields.io/npm/v/@titanium/tiapp-xml.png)](https://www.npmjs.com/package/@titanium/tiapp-xml)
+
+> Modify your tiapp.xml file from Node.js.  This is a fork from tonylukasavage that primarily addresses the "." in the package name and module but leaving room to possibly add more enhancements.
+
+- [📝 Description](#-description)
+- [🚀 Getting Started](#-getting-started)
+	- [Install](#install)
+- [Examples](#examples)
+	- [Change the Titanium SDK version](#change-the-titanium-sdk-version)
+	- [Disable analytics](#disable-analytics)
+	- [Add a new native module for android](#add-a-new-native-module-for-android)
+	- [Print the tiapp.xml from the tiapp object](#print-the-tiappxml-from-the-tiapp-object)
+- [API](#api)
+	- [load(file)](#loadfile)
+	- [parse(xmlString, filename)](#parsexmlstring-filename)
+	- [find()](#find)
+	- [toString()](#tostring)
+	- [write([file])](#writefile)
+	- [top-level elements](#top-level-elements)
+	- [getDeploymentTarget(platform)](#getdeploymenttargetplatform)
+	- [getDeploymentTargets()](#getdeploymenttargets)
+	- [setDeploymentTarget(platform, value)](#setdeploymenttargetplatform-value)
+	- [setDeploymentTargets(obj)](#setdeploymenttargetsobj)
+	- [getProperty(name)](#getpropertyname)
+	- [setProperty(name, [value], [type])](#setpropertyname-value-type)
+	- [removeProperty(name)](#removepropertyname)
+	- [getModules()](#getmodules)
+	- [setModule(id, [version], [platform])](#setmoduleid-version-platform)
+	- [removeModule(id, [platform])](#removemoduleid-platform)
+	- [getPlugins()](#getplugins)
+	- [setPlugin(id, [version])](#setpluginid-version)
+	- [removePlugin(id)](#removepluginid)
+	- [doc](#doc)
+- [Todo](#todo)
+- [📚Learn More](#learn-more)
+- [📣 Feedback](#-feedback)
+
+
+## 📝 Description 
 
 A node.js parsing and manipulation API module for Appcelerator's [Titanium](http://www.appcelerator.com/titanium/) tiapp.xml configuration file. It makes it exceedingly easy now to read and modify entries in the tiapp.xml file programmatically. No need to manually parse XML anymore, but [you can](#doc) if you so choose.
 
@@ -6,10 +46,14 @@ For complete details regarding tiapp.xml files, please consult Appcelerator's [f
 
 
 
-## Install [![NPM version](https://badge.fury.io/js/tiapp.xml.svg)](http://badge.fury.io/js/tiapp.xml)
+## 🚀 Getting Started
+
+### Install
+
+Install `@titanium/tiapp-xml` in root of your project
 
 ```bash
-$ npm install tiapp.xml
+$ npm install @titanium/tiapp-xml
 ```
 
 ## Examples
@@ -17,15 +61,15 @@ $ npm install tiapp.xml
 ### Change the Titanium SDK version
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
-tiapp.sdkVersion = '3.2.2.GA';
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
+tiapp.sdkVersion = '8.1.0.GA';
 tiapp.write();
 ```
 
 ### Disable analytics
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 tiapp.analytics = false;
 tiapp.write();
 ```
@@ -33,7 +77,7 @@ tiapp.write();
 ### Add a new native module for android
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 tiapp.setModule('com.tonylukasavage.someCoolModule', '1.0', 'android');
 tiapp.write();
 ```
@@ -41,7 +85,7 @@ tiapp.write();
 ### Print the tiapp.xml from the tiapp object
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.doc.toString());
 ```
 
@@ -75,7 +119,7 @@ console.log(tiapp.doc.toString());
 Load a tiapp.xml file and return a Tiapp object. If `file` is undefined, [find()](#find) will attempt to locate a tiapp.xml file.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 ```
 
 ### parse(xmlString, filename)
@@ -83,7 +127,7 @@ var tiapp = require('tiapp.xml').load('./tiapp.xml');
 Parse an xml string as a tiapp.xml document and return a Tiapp object. This is used by `load()` and generally isn't used directly. `filename` is optional, and is used only as a default value if you attempt to [write()](#writefile) later.
 
 ```js
-var tiapp = require('tiapp.xml').parse('<ti:app><!-- the rest of the tiapp.xml --></ti:app>');
+var tiapp = require('@titanium/tiapp-xml').parse('<ti:app><!-- the rest of the tiapp.xml --></ti:app>');
 ```
 
 ### find()
@@ -91,7 +135,7 @@ var tiapp = require('tiapp.xml').parse('<ti:app><!-- the rest of the tiapp.xml -
 Find a tiapp.xml file and return its file path. It will start by searching the current working directory for a tiapp.xml file. If it doesn't find it, it will continue to move up the folder hierarchy attempting to find tiapp.xml files. If it never finds a tiapp.xml, it returns `null`.
 
 ```js
-var pathToTiappXml = require('tiapp.xml').find();
+var pathToTiappXml = require('@titanium/tiapp-xml').find();
 ```
 
 ### toString()
@@ -99,7 +143,7 @@ var pathToTiappXml = require('tiapp.xml').find();
 Return the string representation of the tiapp.xml file.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.toString());
 ```
 
@@ -108,7 +152,7 @@ console.log(tiapp.toString());
 Write the current Tiapp object out as a tiapp.xml file to `file`. If `file` is undefined, it will use the file supplied in the inital [load()](#loadfile) or [parse()](#parsexmlstring-filename) call. If it still can't find a file, an exception with be thrown.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // disable analytics
 tiapp.analytics = false;
@@ -125,7 +169,7 @@ tiapp.write('/path/to/tiapp.xml');
 Get and set [top-level tiapp.xml elements](http://docs.appcelerator.com/titanium/latest/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-TopLevelElements) directly as properties. These properties can be referenced in dash form or camel case. For example, to work with the `sdk-version` you can use either `tiapp['sdk-version']` or `tiapp.sdkVersion`.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // prints the name and guid of the app
 console.log(tiapp.name + ': ' + tiapp.guid);
@@ -142,7 +186,7 @@ tiapp['sdk-version'] = '3.2.2.GA';
 Return a boolean indicating whether or not the given `platform` is enabled. If no `platform` is given, [getDeploymentTargets](#getdeploymenttargets) is called instead.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.getDeploymentTarget('android'));
 ```
 
@@ -159,7 +203,7 @@ The previous code would print `true` if the `deployment-targets` section of your
 Return an object representation of all the deployment target elements.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.getDeploymentTargets());
 ```
 
@@ -181,7 +225,7 @@ The previous code executed against a tiapp.xml that had everything but Tizen ena
 Enable or disable a platform. If `platform` is an object, [setDeploymentTargets](#setdeploymenttargetsobj) is called instead.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 tiapp.setDeploymentTarget('android', false);
 tiapp.write();
 ```
@@ -199,7 +243,7 @@ The previous code would write a `deployment-targets` entry something like this:
 Enabled or disable all platforms at once. `obj` is an object representation of all deployment targets.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // get existing list of deployment targets
 var targets = tiapp.getDeploymentTarget();
@@ -227,7 +271,7 @@ tiapp.write();
 Get a tiapp.xml [application property](http://docs.appcelerator.com/titanium/latest/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-ApplicationProperties) value.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.getProperty('ti.ui.defaultunit')); // prints "system"
 ```
 
@@ -236,7 +280,7 @@ console.log(tiapp.getProperty('ti.ui.defaultunit')); // prints "system"
 Set a tiapp.xml [application property](http://docs.appcelerator.com/titanium/latest/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-ApplicationProperties).
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // with just a value
 tiapp.setProperty('ti.ui.defaultunit', 'dp');
@@ -252,7 +296,7 @@ tiapp.write();
 Remove an [application property](http://docs.appcelerator.com/titanium/latest/#!/guide/tiapp.xml_and_timodule.xml_Reference-section-29004921_tiapp.xmlandtimodule.xmlReference-ApplicationProperties) from the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 tiapp.removeProperty('ti.ui.defaultunit');
 tiapp.write();
 ```
@@ -262,7 +306,7 @@ tiapp.write();
 Get an array of objects representing modules listed in the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 var modules = tiapp.getModules();
 
 // iterate through a list of modules from the tiapp.xml
@@ -278,7 +322,7 @@ modules.forEach(function(mod) {
 Add or update a module in the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // Add the ti.cloud module
 tiapp.setModule('ti.cloud');
@@ -317,7 +361,7 @@ The resulting tiapp.xml `<modules>` section would look like this:
 Remove a module from the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // remove ti.cloud module that is _not_ platform-specific
 tiapp.removeModule('ti.cloud');
@@ -333,7 +377,7 @@ tiapp.write();
 Get an array of objects representing plugins listed in the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 var plugins = tiapp.getPlugins();
 
 // iterate through a list of plugins from the tiapp.xml
@@ -348,7 +392,7 @@ plugins.forEach(function(plugin) {
 Add or update a plugin in the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 
 // Add the ti.alloy plugin
 tiapp.setPlugin('ti.alloy');
@@ -372,7 +416,7 @@ The resulting tiapp.xml `<plugins>` section would look like this:
 Remove a plugin from the tiapp.xml.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 tiapp.removePlugin('ti.alloy');
 tiapp.write();
 ```
@@ -382,10 +426,21 @@ tiapp.write();
 A direct reference to the underlying XML Document object as supplied by [xmldom](https://github.com/jindw/xmldom). You will not need to use this in most cases and should use the tiapp.xml module APIs instead.
 
 ```js
-var tiapp = require('tiapp.xml').load('./tiapp.xml');
+var tiapp = require('@titanium/tiapp-xml').load('./tiapp.xml');
 console.log(tiapp.doc.documentElement.nodeName); // prints "ti:app"
 ```
 
 ## Todo
 
 * Platform-specific tiapp.xml sections
+
+
+
+## 📚Learn More
+
+- https://github.com/tonylukasavage/tiapp.xml - Original repo by [tonylukasavage](https://github.com/tonylukasavage)
+
+
+## 📣 Feedback
+
+Have an idea or a comment?  [Join in the conversation here](https://github.com/brentonhouse/titanium-tiapp-xml/issues)! 
