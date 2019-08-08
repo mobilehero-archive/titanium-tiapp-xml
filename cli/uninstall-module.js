@@ -23,6 +23,7 @@ if (!args.length && process.env.npm_package_name) {
 	platforms.forEach(platform => {
 		removeModule(process.env.npm_package_name, platform);
 	});
+	tiapp.write();
 
 } else if (args.length) {
 	removeModule(args[0], args[1]);

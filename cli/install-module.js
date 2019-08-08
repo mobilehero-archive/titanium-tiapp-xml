@@ -2,7 +2,7 @@
 var path = require('path');
 var args = process.argv.slice(2);
 
-console.error('process.env: ' + JSON.stringify(process.env, null, 2));
+// console.error('process.env: ' + JSON.stringify(process.env, null, 2));
 
 if (!args.length && !process.env.npm_package_name) {
 	console.error('No parameters specified and not run from npm package script');
@@ -27,10 +27,12 @@ if (!args.length && process.env.npm_package_name) {
 		removeModule(process.env.npm_package_name, platform);
 		addModule(process.env.npm_package_name, platform, process.env.npm_package_version);
 	});
+	tiapp.write();
 
 } else if (args.length) {
 	removeModule(args[0], args[1]);
 	addModule(args[0], args[1], args[2]);
+	tiapp.write();
 }
 
 function addModule(name, platform, version) {
