@@ -1,28 +1,28 @@
-var _ = require('lodash'),
-	constants = require('constants'),
-	fs = require('fs'),
-	path = require('path'),
-	should = require('should'),
-	tiappXml = require('..'),
-	U = require('../lib/util');
+var _ = require('lodash');
+var constants = require('constants');
+var fs = require('fs');
+var path = require('path');
+var should = require('should');
+var tiappXml = require('..');
+var U = require('../lib/util');
 
-var ROOT = process.cwd(),
-	TMP = path.resolve('tmp'),
-	INVALID_TIAPP_ARGS = [123, function(){}, [1,2,3], true, false, NaN, Infinity, null],
-	TIAPP_XML = path.resolve('test', 'fixtures', 'tiapp.xml'),
-	TIAPP_BAD_XML = path.resolve('test', 'fixtures', 'tiapp.bad.xml'),
-	TESTFIND_END = path.resolve('test', 'fixtures', 'testfind', '1', '2', '3'),
-	TESTFIND_TIAPP_XML = path.resolve('test', 'fixtures', 'testfind', 'tiapp.xml'),
-	INVALID_XML = ['<WTF></WTFF>', '</elem>', 'badelem></badelem>'],
-	VALID_XML = [];
+var ROOT = process.cwd();
+var TMP = path.resolve('tmp');
+var INVALID_TIAPP_ARGS = [ 123, function () {}, [ 1, 2, 3 ], true, false, NaN, Infinity, null ];
+var TIAPP_XML = path.resolve('test', 'fixtures', 'tiapp.xml');
+var TIAPP_BAD_XML = path.resolve('test', 'fixtures', 'tiapp.bad.xml');
+var TESTFIND_END = path.resolve('test', 'fixtures', 'testfind', '1', '2', '3');
+var TESTFIND_TIAPP_XML = path.resolve('test', 'fixtures', 'testfind', 'tiapp.xml');
+var INVALID_XML = [ '<WTF></WTFF>', '</elem>', 'badelem></badelem>' ];
+var VALID_XML = [];
 
 // custom assertions for Tiapp
-should.Assertion.add('Tiapp', function() {
+should.Assertion.add('Tiapp', function () {
 	this.params = { operator: 'to be a Tiapp object' };
 	this.assert(this.obj && U.isFunction(this.obj.parse));
 }, true);
 
-should.Assertion.add('loadedTiapp', function() {
+should.Assertion.add('loadedTiapp', function () {
 	this.params = { operator: 'to be a loaded Tiapp object' };
 	this.assert(this.obj !== null && typeof this.obj !== 'undefined');
 	this.assert(this.obj.doc !== null && typeof this.obj.doc !== 'undefined');
@@ -36,19 +36,19 @@ if (!fs.existsSync(TMP)) {
 }
 
 // test suite
-describe('Tiapp', function() {
+describe('Tiapp', () => {
 
-	beforeEach(function() {
+	beforeEach(() => {
 		process.chdir(ROOT);
 	});
 
-	describe('#find', function() {
+	describe('#find', () => {
 
-		it('should return null when no tiapp.xml is found', function() {
+		it('should return null when no tiapp.xml is found', () => {
 			should.equal(tiappXml.find(), null);
 		});
 
-		it('should find tiapp.xml in current directory', function() {
+		it('should find tiapp.xml in current directory', () => {
 			process.chdir(path.dirname(TESTFIND_TIAPP_XML));
 			tiappXml.find().should.equal(TESTFIND_TIAPP_XML);
 
@@ -56,12 +56,12 @@ describe('Tiapp', function() {
 			tiappXml.find().should.equal(TIAPP_XML);
 		});
 
-		it('should find tiapp.xml in target directory', function() {
+		it('should find tiapp.xml in target directory', () => {
 			tiappXml.find(TESTFIND_END).should.equal(TESTFIND_TIAPP_XML);
 			tiappXml.find(path.resolve('test', 'fixtures')).should.equal(TIAPP_XML);
 		});
 
-		it('should find tiapp.xml in directory hierarchy', function() {
+		it('should find tiapp.xml in directory hierarchy', () => {
 			process.chdir(path.dirname(TESTFIND_END));
 			tiappXml.find().should.equal(TESTFIND_TIAPP_XML);
 
@@ -71,36 +71,36 @@ describe('Tiapp', function() {
 
 	});
 
-	describe('#load', function() {
+	describe('#load', () => {
 
-		it('should throw if file does not exist', function() {
-			(function() {
+		it('should throw if file does not exist', () => {
+			(function () {
 				tiappXml.load('./some/totally/fake/path/tiapp.xml');
 			}).should.throw(/not found/);
 		});
 
-		it('should throw if file is not valid XML', function() {
-			(function() {
+		it('should throw if file is not valid XML', () => {
+			(function () {
 				tiappXml.load(TIAPP_BAD_XML);
 			}).should.throw();
 		});
 
-		it('should load given a file', function() {
+		it('should load given a file', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 			tiapp.file.should.equal(TIAPP_XML);
 			tiapp.should.be.loadedTiapp;
 		});
 
-		it('should load without a file via find()', function() {
+		it('should load without a file via find()', () => {
 			process.chdir(TESTFIND_END);
 			var tiapp = tiappXml.load();
 			tiapp.file.should.equal(TESTFIND_TIAPP_XML);
 			tiapp.should.be.loadedTiapp;
 		});
 
-		INVALID_TIAPP_ARGS.forEach(function(arg) {
-			it('should throw when executed with "' + U.toString(arg) + '"', function() {
-				(function() {
+		INVALID_TIAPP_ARGS.forEach(arg => {
+			it(`should throw when executed with "${U.toString(arg)}"`, () => {
+				(function () {
 					tiappXml.load(arg);
 				}).should.throw(/Bad argument/);
 			});
@@ -108,9 +108,9 @@ describe('Tiapp', function() {
 
 	});
 
-	describe('#parse', function() {
+	describe('#parse', () => {
 
-		it('should parse given xml', function() {
+		it('should parse given xml', () => {
 			var tiapp = tiappXml.parse(fs.readFileSync(TIAPP_XML, 'utf8'), TIAPP_XML);
 			tiapp.should.be.loadedTiapp;
 			tiapp.file.should.equal(TIAPP_XML);
@@ -120,23 +120,23 @@ describe('Tiapp', function() {
 			tiapp.file.should.equal(TESTFIND_TIAPP_XML);
 		});
 
-		it('should throw if parsed document is not a tiapp.xml', function() {
-			(function() {
+		it('should throw if parsed document is not a tiapp.xml', () => {
+			(function () {
 				tiappXml.parse('<done></done>');
 			}).should.throw(/tiapp\.xml/);
 		});
 
-		INVALID_XML.forEach(function(xml) {
-			it('should throw on invalid xml "' + xml + '"', function() {
-				(function() {
+		INVALID_XML.forEach(xml => {
+			it(`should throw on invalid xml "${xml}"`, () => {
+				(function () {
 					tiappXml.parse(xml);
 				}).should.throw();
 			});
 		});
 
-		INVALID_TIAPP_ARGS.concat(undefined).forEach(function(arg) {
-			it('should throw if xml is "' + U.toString(arg) + '"', function() {
-				(function() {
+		INVALID_TIAPP_ARGS.concat(undefined).forEach(arg => {
+			it(`should throw if xml is "${U.toString(arg)}"`, () => {
+				(function () {
 					tiappXml.parse(arg);
 				}).should.throw(/Bad argument/);
 			});
@@ -144,9 +144,9 @@ describe('Tiapp', function() {
 
 	});
 
-	describe('#Tiapp', function() {
+	describe('#Tiapp', () => {
 
-		it('should get/set top level tiapp.xml elements', function() {
+		it('should get/set top level tiapp.xml elements', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.sdkVersion.should.equal('3.2.2.GA');
@@ -177,7 +177,7 @@ describe('Tiapp', function() {
 			tiapp.analytics.should.equal('false');
 		});
 
-		it('should get single deployment-target', function() {
+		it('should get single deployment-target', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.getDeploymentTarget('android').should.be.true;
@@ -188,10 +188,10 @@ describe('Tiapp', function() {
 			tiapp.getDeploymentTarget('tizen').should.be.true;
 			should.equal(tiapp.getDeploymentTarget('what?'), null);
 			should.equal(tiapp.getDeploymentTarget(123), null);
-			should.equal(tiapp.getDeploymentTarget(function(){}), null);
+			should.equal(tiapp.getDeploymentTarget(() => {}), null);
 		});
 
-		it('should get all deployment-targets', function() {
+		it('should get all deployment-targets', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			// with an "s"
@@ -217,7 +217,7 @@ describe('Tiapp', function() {
 			targets.tizen.should.equal(true);
 		});
 
-		it('should set single deployment-target', function() {
+		it('should set single deployment-target', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.setDeploymentTarget('android', false);
@@ -235,7 +235,7 @@ describe('Tiapp', function() {
 			// TODO: return null id <deployment-targets> doesn't exist
 		});
 
-		it('should set all deployment-targets', function() {
+		it('should set all deployment-targets', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			// get existing targets
@@ -266,12 +266,12 @@ describe('Tiapp', function() {
 			targets.tizen.should.equal(false);
 		});
 
-		it('should get application properties', function() {
+		it('should get application properties', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 			tiapp.getProperty('ti.ui.defaultunit').should.equal('dp');
 		});
 
-		it('should set application properties', function() {
+		it('should set application properties', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.setProperty('com.tonylukasavage.property', 'somevalue');
@@ -290,7 +290,7 @@ describe('Tiapp', function() {
 			tiapp.getProperty('com.tonylukasavage.property').should.equal('different');
 		});
 
-		it('should remove properties', function() {
+		it('should remove properties', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.getProperty('ti.ui.defaultunit').should.equal('dp');
@@ -298,7 +298,7 @@ describe('Tiapp', function() {
 			should.equal(tiapp.getProperty('ti.ui.defaultunit'), null);
 		});
 
-		it('should get all modules', function() {
+		it('should get all modules', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			var modules = tiapp.getModules();
@@ -311,11 +311,11 @@ describe('Tiapp', function() {
 				{ id: 'com.appc.foobar', platform: 'android' },
 				{ id: 'com.appc.foobar', platform: 'ios' },
 				{ id: 'com.appc.bar', version: '2.1' },
-				{ id: 'com.appc.quux' }
+				{ id: 'com.appc.quux' },
 			];
 			for (var i = 0; i < tests.length; i++) {
-				var test = tests[i],
-					mod = modules[i];
+				var test = tests[i];
+				var mod = modules[i];
 
 				should.equal(mod.id, test.id);
 				should.equal(mod.version, test.version);
@@ -323,16 +323,16 @@ describe('Tiapp', function() {
 			}
 		});
 
-		it('should set a module', function() {
+		it('should set a module', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			// write some new entries
 			tiapp.setModule('tony.lukasavage', '1.0');
-			tiapp.setModule('charlie.lukasavage', { platform: 'ios'});
+			tiapp.setModule('charlie.lukasavage', { platform: 'ios' });
 			tiapp.setModule('june.lukasavage', '2.0', 'android');
 			tiapp.setModule('whitney.lukasavage');
 
-			var modules = _.filter(tiapp.getModules(), function(m) {
+			var modules = _.filter(tiapp.getModules(), m => {
 				return m.id.indexOf('lukasavage') !== -1;
 			});
 			should.exist(modules);
@@ -357,7 +357,7 @@ describe('Tiapp', function() {
 
 			// trying overwriting
 			tiapp.setModule('whitney.lukasavage', { version: '3.4' });
-			modules = _.filter(tiapp.getModules(), function(m) {
+			modules = _.filter(tiapp.getModules(), m => {
 				return m.id === 'whitney.lukasavage';
 			});
 			should.exist(modules);
@@ -369,13 +369,13 @@ describe('Tiapp', function() {
 			should.not.exist(modules[0].platform);
 
 			// quietly overwrite duplicate
-			(function() {
+			(function () {
 				tiapp.setModule('whitney.lukasavage');
 				tiapp.setModule('whitney.lukasavage');
 			}).should.not.throw();
 		});
 
-		it('should add a module when none already exist', function() {
+		it('should add a module when none already exist', () => {
 			var tiapp = tiappXml.parse('<ti:app></ti:app>');
 
 			var modules = tiapp.getModules();
@@ -388,7 +388,7 @@ describe('Tiapp', function() {
 			modules.length.should.equal(1);
 		});
 
-		it('should remove a module', function() {
+		it('should remove a module', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.removeModule('com.appc.foobar', 'ios');
@@ -400,13 +400,13 @@ describe('Tiapp', function() {
 			modules.should.be.an.Array;
 			modules.length.should.equal(2);
 
-			(function() {
+			(function () {
 				tiapp.removeModule('i.do.not.exist');
 				tiapp.removeModule();
 			}).should.not.throw();
 		});
 
-		it('should get all plugins', function() {
+		it('should get all plugins', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			var plugins = tiapp.getPlugins();
@@ -419,7 +419,7 @@ describe('Tiapp', function() {
 			plugins[0].version.should.equal('1.0');
 		});
 
-		it('should set a plugin', function() {
+		it('should set a plugin', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			// create new
@@ -456,7 +456,7 @@ describe('Tiapp', function() {
 			plugins[0].version.should.equal('2.0');
 		});
 
-		it('should remove a plugin', function() {
+		it('should remove a plugin', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 
 			tiapp.removePlugin('ti.alloy');
@@ -466,18 +466,18 @@ describe('Tiapp', function() {
 			plugins.should.be.an.Array;
 			plugins.length.should.equal(0);
 
-			(function() {
+			(function () {
 				tiapp.removePlugin('i.do.not.exist');
 				tiapp.removePlugin();
 			}).should.not.throw();
 		});
 
-		it('should allow access to XML document object via `doc`', function() {
+		it('should allow access to XML document object via `doc`', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 			tiapp.doc.documentElement.nodeName.should.equal('ti:app');
 		});
 
-		it('should write to a tiapp.xml', function() {
+		it('should write to a tiapp.xml', () => {
 			var tiapp = tiappXml.load(TIAPP_XML);
 			tiapp.id.should.equal('com.tonylukasavage.tiapp');
 
@@ -496,7 +496,7 @@ describe('Tiapp', function() {
 			tiapp.id.should.equal('a.different.id');
 		});
 
-		it('should create pretty xml with write() and toString()', function() {
+		it('should create pretty xml with write() and toString()', () => {
 			var tiapp = tiappXml.parse('<ti:app xmlns:ti="http://ti.appcelerator.org"/>');
 
 			// fill in initial values
@@ -508,11 +508,11 @@ describe('Tiapp', function() {
 			tiapp.setModule('com.appc.foobar', { platform: 'android' });
 			tiapp.setModule('com.appc.foobar', { platform: 'ios' });
 			tiapp.setDeploymentTargets({
-				android: true,
-				ipad: true,
-				iphone: true,
+				android:   true,
+				ipad:      true,
+				iphone:    true,
 				mobileweb: false,
-				tizen: false
+				tizen:     false,
 			});
 			tiapp.setPlugin('ti.alloy', '1.0');
 

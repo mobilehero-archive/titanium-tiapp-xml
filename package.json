@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Fork from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -20,6 +20,10 @@
 		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"bin": {
+		"tiapp-add-module": "./cli/add-module.js",
+		"tiapp-remove-module": "./cli/remove-module.js"
+	},
 	"repository": {
 		"type": "git",
 		"url": "github:brentonhouse/titanium-tiapp-xml"
@@ -29,8 +33,11 @@
 	},
 	"homepage": "https://github.com/brentonhouse/titanium-tiapp-xml#readme",
 	"dependencies": {
-		"xmldom": "~0.1.19",
-		"pretty-data2": "~0.40.1"
+		"@geek/eslint-config": "0.0.7",
+		"eslint": "^6.1.0",
+		"find-up": "^4.1.0",
+		"pretty-data2": "~0.40.1",
+		"xmldom": "~0.1.19"
 	},
 	"devDependencies": {
 		"lodash": "^4.17.15",
