@@ -2,6 +2,8 @@
 var path = require('path');
 var args = process.argv.slice(2);
 
+console.error('process.env: ' + JSON.stringify(process.env, null, 2));
+
 if (!args.length && !process.env.npm_package_name) {
 	console.error('No parameters specified and not run from npm package script');
 	process.exit(1);
@@ -16,6 +18,7 @@ if (!root) {
 }
 
 var tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
+console.log('found tiapp.xml:  ' + tiapp);
 
 if (!args.length && process.env.npm_package_name) {
 	var platforms = getPlatforms();
@@ -31,6 +34,8 @@ if (!args.length && process.env.npm_package_name) {
 }
 
 function addModule(name, platform, version) {
+
+	console.error('installing module: ' + JSON.stringify(arguments, null, 2));
 	if (platform && version) {
 		tiapp.setModule(name, { platform: platform, version: version  });
 	} else if (!platform) {
