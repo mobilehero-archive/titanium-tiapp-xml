@@ -1,44 +1,64 @@
 {
-  "name": "tiapp.xml",
-  "version": "0.2.2",
-  "description": "Titanium tiapp.xml parsing and manipulation API",
-  "keywords": [
-    "titanium",
-    "appcelerator",
-    "alloy"
-  ],
-  "homepage": "git://github.com/tonylukasavage/tiapp.xml.git",
-  "bugs": {
-    "url": "https://github.com/tonylukasavage/tiapp.xml/issues",
-    "email": "anthony.lukasavage@gmail.com"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Tony Lukasavage",
-    "email": "anthony.lukasavage@gmail.com",
-    "url": "http://tonylukasavage.com"
-  },
-  "main": "./lib/tiapp.xml.js",
-  "scripts": {
-    "test": "grunt test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/tonylukasavage/tiapp.xml.git"
-  },
-  "dependencies": {
-    "xmldom": "~0.1.19",
-    "pretty-data2": "~0.40.1"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-mocha-test": "~0.10.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "should": "~3.3.0",
-    "lodash": "~2.4.1",
-    "grunt-contrib-clean": "~0.5.0"
-  },
-  "engines": {
-    "node": ">=0.10"
-  }
+	"name": "@titanium/tiapp-xml",
+	"version": "0.2.2",
+	"description": "Titanium tiapp.xml parsing and manipulation API - Fork from tonylukasavage",
+	"license": "MIT",
+	"author": {
+		"name": "Tony Lukasavage",
+		"email": "anthony.lukasavage@gmail.com",
+		"url": "http://tonylukasavage.com"
+	},
+	"maintainers": [
+		{
+			"name": "Brenton House",
+			"email": "brenton.house@gmail.com",
+			"url": "https://brenton.house"
+		}
+	],
+	"main": "./lib/tiapp-xml.js",
+	"scripts": {
+		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "github:brentonhouse/titanium-tiapp-xml"
+	},
+	"bugs": {
+		"url": "https://github.com/brentonhouse/titanium-tiapp-xml/issues"
+	},
+	"homepage": "https://github.com/brentonhouse/titanium-tiapp-xml#readme",
+	"dependencies": {
+		"xmldom": "~0.1.19",
+		"pretty-data2": "~0.40.1"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.4",
+		"grunt-mocha-test": "~0.10.0",
+		"grunt-contrib-jshint": "~0.10.0",
+		"should": "~3.3.0",
+		"lodash": "~2.4.1",
+		"grunt-contrib-clean": "~0.5.0"
+	},
+	"engines": {
+		"node": ">=0.10"
+	},
+	"keywords": [
+		"titanium",
+		"mobile",
+		"alloy",
+		"turbo",
+		"axway",
+		"appcelerator",
+		"ios",
+		"android",
+		"iphone",
+		"ipad",
+		"tiapp",
+		"xml",
+		"brentonhouse"
+	],
+	"titanium": {
+		"ignore": true
+	}
 }
