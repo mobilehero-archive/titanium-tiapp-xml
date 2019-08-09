@@ -16,6 +16,9 @@ if (!root) {
 	process.exit(1);
 }
 
+const tiapp_path = path.join(root, 'tiapp.xml');
+console.log(`Found tiapp.xml:  ${tiapp_path}`);
+
 const tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
 
 if (!args.length && process.env.npm_package_name) {
