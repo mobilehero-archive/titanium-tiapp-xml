@@ -3,6 +3,8 @@ const path = require('path');
 const args = process.argv.slice(2);
 const get = require('lodash.get');
 
+console.error(`process.env: ${JSON.stringify(process.env, null, 2)}`);
+
 if (!args.length && !process.env.npm_package_name) {
 	console.error('No parameters specified and not run from npm package script');
 	process.exit(1);
