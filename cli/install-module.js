@@ -1,28 +1,33 @@
 #!/usr/bin/env node
-var path = require('path');
-var args = process.argv.slice(2);
+const path = require('path');
+const args = process.argv.slice(2);
+const get = require('lodash.get');
 
 if (!args.length && !process.env.npm_package_name) {
 	console.error('No parameters specified and not run from npm package script');
 	process.exit(1);
 }
 
-var tiappDir = require('../lib/tiapp-dir');
-var root = tiappDir.sync(__dirname);
+const tiappDir = require('../lib/tiapp-dir');
+const root = tiappDir.sync(__dirname);
 
 if (!root) {
-	console.error('Could not find tiapp.xml in directory tree: ' + __dirname);
+	console.error(`Could not find tiapp.xml in directory tree: ${__dirname}`);
 	process.exit(1);
 }
 
-var tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
+const tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
 
 if (!args.length && process.env.npm_package_name) {
-	var platforms = getPlatforms();
+	const platforms = getPlatforms();
 
 	platforms.forEach(platform => {
-		removeModule(process.env.npm_package_name, platform);
-		addModule(process.env.npm_package_name, platform, process.env.npm_package_version);
+
+		const module_id = get(process.env, `npm_package_titanium_platform_${platform}_moduleid`);
+		const module_version = get(process.env, `npm_package_titanium_platform_${platform}_version`);
+
+		removeModule(module_id, platform);
+		addModule(module_id, platform, module_version);
 	});
 	tiapp.write();
 
@@ -34,7 +39,7 @@ if (!args.length && process.env.npm_package_name) {
 
 function addModule(name, platform, version) {
 
-	console.error('installing module.  name: ' + name + ' platform: ' + platform + ' version: ' + version);
+	console.error(`installing module.  name: ${name} platform: ${platform} version: ${version}`);
 	if (platform && version) {
 		tiapp.setModule(name, { platform: platform, version: version  });
 	} else if (!platform) {
@@ -45,7 +50,7 @@ function addModule(name, platform, version) {
 }
 
 function removeModule(name, platform) {
-	console.error('removing module.  name: ' + name + ' platform: ' + platform);
+	console.error(`removing module.  name: ${name} platform: ${platform}`);
 	if (platform) {
 		tiapp.removeModule(name, platform);
 	} else {
@@ -55,14 +60,13 @@ function removeModule(name, platform) {
 
 function getPlatforms() {
 
-	var platforms = [];
+	const platforms = [];
 
-	process.env.npm_package_titanium_platform_0 && platforms.push(process.env.npm_package_titanium_platform_0);
-	process.env.npm_package_titanium_platform_1 && platforms.push(process.env.npm_package_titanium_platform_1);
-	process.env.npm_package_titanium_platform_2 && platforms.push(process.env.npm_package_titanium_platform_2);
+	process.env.npm_package_titanium_platform_ios && platforms.push('ios');
+	process.env.npm_package_titanium_platform_android && platforms.push('android');
 
 	if (!platforms.length) {
-		console.error('titanium.platform not defined in package.json for package: ' + process.env.npm_package_name);
+		console.error(`titanium.platform not defined in package.json for package: ${process.env.npm_package_name}`);
 		process.exit(1);
 	}
 

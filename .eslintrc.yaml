@@ -1,5 +1,5 @@
 parserOptions:
-  ecmaVersion: 2017
+  ecmaVersion: 2018
   sourceType: module
   ecmaFeatures:
     modules: true
@@ -9,4 +9,6 @@ env:
 extends: '@geek'
 
 rules:
-  prefer-template: 'off'
+  no-var: error
+
+
