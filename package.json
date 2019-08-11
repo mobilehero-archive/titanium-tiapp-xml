@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "0.7.2",
+	"version": "0.8.0",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Fork from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -22,7 +22,7 @@
 		"test:install-platform": "./cli/add-module.js my.test.module ios",
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "npm install --ignore-scripts && npm run list-files"
 	},
 	"bin": {
 		"tiapp-install-module": "./cli/install-module.js",
@@ -43,12 +43,12 @@
 		"xmldom": "~0.1.19"
 	},
 	"devDependencies": {
-		"@geek/eslint-config": "0.0.7",
+		"@geek/eslint-config": "0.0.8",
 		"eslint": "^6.1.0",
 		"should": "~3.3.0"
 	},
 	"engines": {
-		"node": ">=0.10"
+		"node": ">=8.0"
 	},
 	"keywords": [
 		"titanium",

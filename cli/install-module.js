@@ -27,8 +27,10 @@ if (!args.length && process.env.npm_package_name) {
 	platforms.forEach(platform => {
 
 		const module_id = get(process.env, `npm_package_titanium_platform_${platform}_moduleid`);
-		const module_version = get(process.env, `npm_package_titanium_platform_${platform}_version`);
 
+		// This is not supported yet but will be once PR is merged and into SDK:  https://github.com/appcelerator/node-appc/pull/173
+		// const module_version = get(process.env, `npm_package_titanium_platform_${platform}_version`) || get(process.env, `npm_package_titanium_version`) || get(process.env, `npm_package_version`);
+		const module_version = get(process.env, `npm_package_version`);  // using this temporarily as this is the method 8.1.0 SDK currently uses.
 		removeModule(module_id, platform);
 		addModule(module_id, platform, module_version);
 	});
