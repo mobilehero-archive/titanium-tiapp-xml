@@ -25,7 +25,8 @@ if (!args.length && process.env.npm_package_name) {
 	const platforms = getPlatforms();
 
 	platforms.forEach(platform => {
-		const module_id = get(process.env, `npm_package_titanium_platform_${platform}_moduleid`);
+		// Logic for this will change once PR is merged and into SDK:  https://github.com/appcelerator/node-appc/pull/173
+		const module_id = get(process.env, `npm_package_titanium_platform_${platform}_moduleid`) || get(process.env, `npm_package_titanium_moduleid`);
 		removeModule(module_id, platform);
 	});
 	tiapp.write();
@@ -48,8 +49,19 @@ function getPlatforms() {
 
 	const platforms = [];
 
-	process.env.npm_package_titanium_platform_ios_moduleid && platforms.push('ios');
-	process.env.npm_package_titanium_platform_android_moduleid && platforms.push('android');
+	const keys = Object.keys(process.env);
+
+	if (keys.some(key => {
+		return key.startsWith('npm_package_titanium_platform_ios');
+	})) {
+		platforms.push('ios');
+	}
+
+	if (keys.some(key => {
+		return key.startsWith('npm_package_titanium_platform_android');
+	})) {
+		platforms.push('android');
+	}
 
 	if (!platforms.length) {
 		console.error(`titanium.platform not defined in package.json for package: ${process.env.npm_package_name}`);
