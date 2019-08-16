@@ -1,11 +1,11 @@
-var xmldom = require('xmldom');
+const xmldom = require('xmldom');
 
 // TODO: trim
 exports.getNodeText = function getNodeText(node) {
 	if (!node) { return ''; }
-	var serializer = new xmldom.XMLSerializer();
-	var str = '';
-	for (var c = 0; c < node.childNodes.length; c++) {
+	const serializer = new xmldom.XMLSerializer();
+	let str = '';
+	for (let c = 0; c < node.childNodes.length; c++) {
 		if (node.childNodes[c].nodeType === 3) {
 			str += serializer.serializeToString(node.childNodes[c]);
 		}
@@ -18,12 +18,12 @@ exports.setNodeText = function setNodeText(node, val) {
 		return;
 	}
 
-	var doc = node.ownerDocument;
-	var children = node.childNodes;
+	const doc = node.ownerDocument;
+	const children = node.childNodes;
 
 	// find and replace the text node
-	for (var i = 0, len = children.length; i < len; i++) {
-		var child = children.item(i);
+	for (let i = 0, len = children.length; i < len; i++) {
+		const child = children.item(i);
 		if (child.nodeType === 3) {
 			node.replaceChild(doc.createTextNode(val), child);
 			return;
@@ -35,7 +35,7 @@ exports.setNodeText = function setNodeText(node, val) {
 };
 
 exports.getTagText = function getTagText(node, name) {
-	var nodes = node.getElementsByTagName(name);
+	const nodes = node.getElementsByTagName(name);
 	if (nodes && nodes.length) {
 		return exports.getNodeText(nodes.item(nodes.length - 1));
 	} else {
@@ -52,14 +52,14 @@ exports.parseFromString = function parseFromString(str) {
 };
 
 exports.getLastElement = function getLastElement(node, name) {
-	var nodes = node.getElementsByTagName(name);
+	const nodes = node.getElementsByTagName(name);
 	return nodes && nodes.length > 0 ? nodes.item(nodes.length - 1) : null;
 };
 
 exports.getElementWithAttribute = function getElementWithAttribute(node, name, attr, value) {
-	var elems = this.doc.documentElement.getElementsByTagName(name);
-	for (var i = 0, len = elems.length; i < len; i++) {
-		var elem = elems.item(i);
+	const elems = this.doc.documentElement.getElementsByTagName(name);
+	for (let i = 0, len = elems.length; i < len; i++) {
+		const elem = elems.item(i);
 		if (elem.hasAttribute(attr) && elem.getAttribute(attr) === value) {
 			return elem;
 		}
@@ -68,7 +68,7 @@ exports.getElementWithAttribute = function getElementWithAttribute(node, name, a
 };
 
 exports.ensureElement = function ensureElement(node, name) {
-	var elem = exports.getLastElement(node, name);
+	let elem = exports.getLastElement(node, name);
 	if (!elem) {
 		elem = node.ownerDocument.createElement(name);
 		node.appendChild(elem);
@@ -77,7 +77,7 @@ exports.ensureElement = function ensureElement(node, name) {
 };
 
 exports.removeAllChildren = function removeAllChildren(node) {
-	for (var i = node.childNodes.length - 1; i >= 0; i--) {
+	for (let i = node.childNodes.length - 1; i >= 0; i--) {
 		node.removeChild(node.childNodes.item(i));
 	}
 };

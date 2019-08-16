@@ -8,7 +8,7 @@ if (!args.length && !process.env.npm_package_name) {
 	process.exit(1);
 }
 
-const tiappDir = require('../lib/tiapp-dir');
+const tiappDir = require('../tiapp-dir');
 const root = tiappDir.sync(__dirname);
 
 if (!root) {
@@ -19,7 +19,7 @@ if (!root) {
 const tiapp_path = path.join(root, 'tiapp.xml');
 console.log(`Found tiapp.xml:  ${tiapp_path}`);
 
-const tiapp = require('../lib/tiapp-xml').load(path.join(root, 'tiapp.xml'));
+const tiapp = require('../tiapp-xml').load(path.join(root, 'tiapp.xml'));
 
 if (!args.length && process.env.npm_package_name) {
 	const platforms = getPlatforms();

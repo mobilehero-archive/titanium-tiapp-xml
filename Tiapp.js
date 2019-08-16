@@ -1,11 +1,11 @@
-var constants = require('./constants');
-var fs = require('fs');
-var pretty = require('pretty-data2').pd;
-var U = require('./util');
-var xml = require('./xml');
+const constants = require('./constants');
+const fs = require('fs');
+const pretty = require('pretty-data2').pd;
+const U = require('./util');
+const xml = require('./xml');
 
 function Tiapp(file, doc) {
-	var self = this;
+	const self = this;
 
 	this.file = file;
 	this.doc = doc;
@@ -15,7 +15,7 @@ function Tiapp(file, doc) {
 
 	// create top-level element getters/setters
 	constants.topLevelElements.forEach(prop => {
-		var topLevelObject = {
+		const topLevelObject = {
 			get: function () {
 				return xml.getTagText(self.doc.documentElement, prop);
 			},
@@ -49,13 +49,13 @@ Tiapp.prototype.getDeploymentTarget = function getDeploymentTarget(platform) {
 	}
 
 	// make sure we have <deployment-targets>
-	var targetsContainer = xml.getLastElement(this.doc.documentElement, 'deployment-targets');
+	const targetsContainer = xml.getLastElement(this.doc.documentElement, 'deployment-targets');
 	if (!targetsContainer) {
 		return null;
 	}
 
 	// get the <target>
-	var target = xml.getElementWithAttribute(targetsContainer, 'target', 'device', platform);
+	const target = xml.getElementWithAttribute(targetsContainer, 'target', 'device', platform);
 	if (target) {
 		return xml.getNodeText(target) === 'true';
 	}
@@ -64,16 +64,16 @@ Tiapp.prototype.getDeploymentTarget = function getDeploymentTarget(platform) {
 
 Tiapp.prototype.getDeploymentTargets = function getDeploymentTargets() {
 	// make sure we have <deployment-targets>
-	var targetsContainer = xml.getLastElement(this.doc.documentElement, 'deployment-targets');
+	const targetsContainer = xml.getLastElement(this.doc.documentElement, 'deployment-targets');
 	if (!targetsContainer) {
 		return null;
 	}
 
 	// create results object from <target> elements
-	var results = {};
-	var targets = targetsContainer.getElementsByTagName('target');
-	for (var i = 0, len = targets.length; i < len; i++) {
-		var target = targets.item(i);
+	const results = {};
+	const targets = targetsContainer.getElementsByTagName('target');
+	for (let i = 0, len = targets.length; i < len; i++) {
+		const target = targets.item(i);
 		results[target.getAttribute('device')] = xml.getNodeText(target) === 'true';
 	}
 
@@ -84,10 +84,10 @@ Tiapp.prototype.setDeploymentTarget = function setDeploymentTarget(platform, val
 	if (!platform) { return; }
 	if (U.isObject(platform)) { return setDeploymentTargets(platform); }
 
-	var targetsContainer = xml.ensureElement(this.doc.documentElement, 'deployment-targets');
-	var targets = targetsContainer.getElementsByTagName('target');
+	const targetsContainer = xml.ensureElement(this.doc.documentElement, 'deployment-targets');
+	const targets = targetsContainer.getElementsByTagName('target');
 
-	var target = xml.getElementWithAttribute(targetsContainer, 'target', 'device', platform);
+	const target = xml.getElementWithAttribute(targetsContainer, 'target', 'device', platform);
 	if (target) {
 		xml.setNodeText(target, value.toString());
 	} else {
@@ -98,8 +98,8 @@ Tiapp.prototype.setDeploymentTarget = function setDeploymentTarget(platform, val
 Tiapp.prototype.setDeploymentTargets = function setDeploymentTargets(obj) {
 	if (!obj) { return; }
 
-	var self = this;
-	var targetsContainer = xml.ensureElement(this.doc.documentElement, 'deployment-targets');
+	const self = this;
+	const targetsContainer = xml.ensureElement(this.doc.documentElement, 'deployment-targets');
 
 	// remove all existing <target> elements
 	xml.removeAllChildren(targetsContainer);
@@ -111,17 +111,17 @@ Tiapp.prototype.setDeploymentTargets = function setDeploymentTargets(obj) {
 };
 
 function addTarget(doc, container, platform, value) {
-	var elem = doc.createElement('target');
+	const elem = doc.createElement('target');
 	elem.setAttribute('device', platform);
 	elem.appendChild(doc.createTextNode(value.toString()));
 	container.appendChild(elem);
 }
 
 Tiapp.prototype.getProperty = function getProperty(name) {
-	var property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
+	const property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
 	if (property) {
-		var value = xml.getNodeText(property);
-		var type = property.hasAttribute('type') ? property.getAttribute('type') : 'string';
+		let value = xml.getNodeText(property);
+		const type = property.hasAttribute('type') ? property.getAttribute('type') : 'string';
 
 		// convert value based on type
 		if (type === 'bool') {
@@ -138,7 +138,7 @@ Tiapp.prototype.getProperty = function getProperty(name) {
 };
 
 Tiapp.prototype.setProperty = function (name, value, type) {
-	var len = arguments.length; var
+	const len = arguments.length; let
 		i;
 	if (!name) {
 		throw new Error('name must be defined');
@@ -146,7 +146,7 @@ Tiapp.prototype.setProperty = function (name, value, type) {
 	if (value == null) { value = ''; }
 
 	// try to update existing property element
-	var property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
+	const property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
 	if (property) {
 		if (type) {
 			property.setAttribute('type', type);
@@ -156,7 +156,7 @@ Tiapp.prototype.setProperty = function (name, value, type) {
 	}
 
 	// create a new property
-	var elem = this.doc.createElement('property');
+	const elem = this.doc.createElement('property');
 	elem.setAttribute('name', name);
 	if (type) {
 		elem.setAttribute('type', type);
@@ -166,7 +166,7 @@ Tiapp.prototype.setProperty = function (name, value, type) {
 };
 
 Tiapp.prototype.removeProperty = function removeProperty(name) {
-	var property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
+	const property = xml.getElementWithAttribute(this.doc.documentElement, 'property', 'name', name);
 	if (property) {
 		this.doc.documentElement.removeChild(property);
 	}
@@ -178,7 +178,7 @@ Tiapp.prototype.getModules = function getModules() {
 
 Tiapp.prototype.setModule = function setModule(id, version, platform) {
 	if (U.isObject(version)) {
-		var opts = version;
+		const opts = version;
 		platform = opts.platform;
 		version = opts.version;
 	}
@@ -206,18 +206,18 @@ module.exports = Tiapp;
 
 // helpers
 function getItems(node, itemName) {
-	var groupName = `${itemName}s`;
-	var results = [];
+	const groupName = `${itemName}s`;
+	const results = [];
 
-	var group = xml.getLastElement(node, groupName);
+	const group = xml.getLastElement(node, groupName);
 	if (!group) {
 		return results;
 	}
 
-	var items = group.getElementsByTagName(itemName);
-	for (var i = 0, len = items.length; i < len; i++) {
-		var item = items.item(i);
-		var result = { id: xml.getNodeText(item) };
+	const items = group.getElementsByTagName(itemName);
+	for (let i = 0, len = items.length; i < len; i++) {
+		const item = items.item(i);
+		const result = { id: xml.getNodeText(item) };
 
 		if (item.hasAttribute('version')) { result.version = item.getAttribute('version'); }
 		if (item.hasAttribute('platform')) { result.platform = item.getAttribute('platform'); }
@@ -230,14 +230,14 @@ function getItems(node, itemName) {
 function setItem(node, itemName, id, version, platform) {
 	if (!id) { return; }
 
-	var groupName = `${itemName}s`;
-	var group = xml.ensureElement(node, groupName);
-	var items = group.getElementsByTagName(itemName);
-	var found = false;
+	const groupName = `${itemName}s`;
+	const group = xml.ensureElement(node, groupName);
+	const items = group.getElementsByTagName(itemName);
+	let found = false;
 
 	// try to update an existing module entry
-	for (var i = 0, len = items.length; i < len; i++) {
-		var item = items.item(i);
+	for (let i = 0, len = items.length; i < len; i++) {
+		const item = items.item(i);
 		if (xml.getNodeText(item) === id
 			&& ((!item.hasAttribute('platform') && !platform) || (item.getAttribute('platform') === platform))) {
 			if (version) {
@@ -251,7 +251,7 @@ function setItem(node, itemName, id, version, platform) {
 
 	// if it's not an update, create a new module entry
 	if (!found) {
-		var elem = node.ownerDocument.createElement(itemName);
+		const elem = node.ownerDocument.createElement(itemName);
 		if (platform) { elem.setAttribute('platform', platform); }
 		if (version) { elem.setAttribute('version', version.toString()); }
 		elem.appendChild(node.ownerDocument.createTextNode(id));
@@ -262,12 +262,12 @@ function setItem(node, itemName, id, version, platform) {
 function removeItem(node, itemName, id, platform) {
 	if (!id) { return; }
 
-	var groupName = `${itemName}s`;
-	var group = xml.ensureElement(node, groupName);
-	var items = group.getElementsByTagName(itemName);
+	const groupName = `${itemName}s`;
+	const group = xml.ensureElement(node, groupName);
+	const items = group.getElementsByTagName(itemName);
 
-	for (var i = items.length - 1; i >= 0; i--) {
-		var item = items.item(i);
+	for (let i = items.length - 1; i >= 0; i--) {
+		const item = items.item(i);
 		if (xml.getNodeText(item) === id
 			&& ((!item.hasAttribute('platform') && !platform) || (item.getAttribute('platform') === platform))) {
 			group.removeChild(item);

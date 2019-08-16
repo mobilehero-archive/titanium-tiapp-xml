@@ -13,8 +13,8 @@ exports.toString = function toString(o) {
 };
 
 exports.dashToCamelCase = function dashToCamelCase(str) {
-	var parts = str.split('-');
-	var newStr = '';
+	const parts = str.split('-');
+	let newStr = '';
 
 	parts.forEach((part, i) => {
 		newStr += i === 0 ? part : part.substr(0, 1).toUpperCase() + part.substr(1);
@@ -23,7 +23,7 @@ exports.dashToCamelCase = function dashToCamelCase(str) {
 };
 
 // The "is" functions are slight mods on underscore.js's (Jeremy Ashkenas - @jashkenas)
-var types = [ 'Function', 'String', 'Number' ];
+const types = [ 'Function', 'String', 'Number' ];
 types.forEach(type => {
 	exports[`is${type}`] = function (o) {
 		return Object.prototype.toString.call(o) === `[object ${type}]`;

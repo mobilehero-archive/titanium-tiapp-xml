@@ -1,12 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var Tiapp = require('./Tiapp');
-var U = require('./util');
-var xml = require('./xml');
+const fs = require('fs');
+const path = require('path');
+const Tiapp = require('./Tiapp');
+const U = require('./util');
+const xml = require('./xml');
 
 exports.find = function find(dir) {
-	var cwd = dir || process.cwd();
-	var parts = cwd.split(path.sep);
+	const cwd = dir || process.cwd();
+	const parts = cwd.split(path.sep);
 
 	// remove empty element
 	if (parts[0] === '') {
@@ -14,8 +14,8 @@ exports.find = function find(dir) {
 	}
 
 	// iterate up through hierarchy to try and find a tiapp.xml
-	for (var i = 0, len = parts.length; i < len; i++) {
-		var p = (/^win/.test(process.platform) ? '' : path.sep)
+	for (let i = 0, len = parts.length; i < len; i++) {
+		const p = (/^win/.test(process.platform) ? '' : path.sep)
 			+ path.join.apply(path, parts.slice(0, len - i).concat('tiapp.xml'));
 		if (fs.existsSync(p) && fs.statSync(p).isFile()) {
 			return p;
@@ -33,7 +33,7 @@ exports.parse = function parse(str, file) {
 	}
 
 	// parse the xml
-	var doc = xml.parseFromString(str);
+	const doc = xml.parseFromString(str);
 
 	// make sure it's actually a tiapp.xml
 	if (!doc || !doc.documentElement) {

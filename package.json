@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Fork from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -15,7 +15,7 @@
 			"url": "https://brenton.house"
 		}
 	],
-	"main": "./lib/tiapp-xml.js",
+	"main": "index.js",
 	"scripts": {
 		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"test:install-all": "./cli/add-module.js my.test.module",
