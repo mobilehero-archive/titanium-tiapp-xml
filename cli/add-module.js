@@ -12,7 +12,7 @@ if (args.length) {
 			process.exit(1);
 		}
 		console.log('Adding module ' + args[0] + ' to ' + path.join(rootPath, 'tiapp.xml'));
-		var tiapp = require('../lib/tiapp-xml').load(path.join(rootPath, 'tiapp.xml'));
+		var tiapp = require('..').load(path.join(rootPath, 'tiapp.xml'));
 
 		switch (args.length) {
 

@@ -12,7 +12,7 @@ if (args.length) {
 			process.exit(1);
 		}
 		console.log(`Removing module ${args[0]} from ${path.join(rootPath, 'tiapp.xml')}`);
-		const tiapp = require('../tiapp-xml').load(path.join(rootPath, 'tiapp.xml'));
+		const tiapp = require('..').load(path.join(rootPath, 'tiapp.xml'));
 
 		switch (args.length) {
 
