@@ -43,7 +43,7 @@
 		"xmldom": "~0.1.19"
 	},
 	"devDependencies": {
-		"@geek/eslint-config": "0.0.8",
+		"@geek/eslint-config": "0.0.9",
 		"eslint": "^6.4.0",
 		"should": "~13.2.3"
 	},
