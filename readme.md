@@ -1,41 +1,48 @@
+<a href="#titaniumtiapp-xml">
+	<p align="center">
+		<img src="https://cdn.secure-api.org/images/warning-sign-area51.png" width="80%" />
+		<img src="https://cdn.secure-api.org/images/border-line-3.png" width="70%" height="50" />
+	</p>
+</a>
+
 # @titanium/tiapp-xml
 
 [![@titanium/tiapp-xml](https://img.shields.io/npm/v/@titanium/tiapp-xml.png)](https://www.npmjs.com/package/@titanium/tiapp-xml)
 
 > Modify your tiapp.xml file from Node.js.  This is a fork from tonylukasavage that primarily addresses the "." in the package name and module but leaving room to possibly add more enhancements.
 
-- [📝 Description](#-description)
-- [🚀 Getting Started](#-getting-started)
-	- [Install](#install)
-- [Examples](#examples)
-	- [Change the Titanium SDK version](#change-the-titanium-sdk-version)
-	- [Disable analytics](#disable-analytics)
-	- [Add a new native module for android](#add-a-new-native-module-for-android)
-	- [Print the tiapp.xml from the tiapp object](#print-the-tiappxml-from-the-tiapp-object)
-- [API](#api)
-	- [load(file)](#loadfile)
-	- [parse(xmlString, filename)](#parsexmlstring-filename)
-	- [find()](#find)
-	- [toString()](#tostring)
-	- [write([file])](#writefile)
-	- [top-level elements](#top-level-elements)
-	- [getDeploymentTarget(platform)](#getdeploymenttargetplatform)
-	- [getDeploymentTargets()](#getdeploymenttargets)
-	- [setDeploymentTarget(platform, value)](#setdeploymenttargetplatform-value)
-	- [setDeploymentTargets(obj)](#setdeploymenttargetsobj)
-	- [getProperty(name)](#getpropertyname)
-	- [setProperty(name, [value], [type])](#setpropertyname-value-type)
-	- [removeProperty(name)](#removepropertyname)
-	- [getModules()](#getmodules)
-	- [setModule(id, [version], [platform])](#setmoduleid-version-platform)
-	- [removeModule(id, [platform])](#removemoduleid-platform)
-	- [getPlugins()](#getplugins)
-	- [setPlugin(id, [version])](#setpluginid-version)
-	- [removePlugin(id)](#removepluginid)
-	- [doc](#doc)
-- [Todo](#todo)
-- [📚Learn More](#learn-more)
-- [📣 Feedback](#-feedback)
+* [📝 Description](#-description)
+* [🚀 Getting Started](#-getting-started)
+	* [Install](#install)
+* [Examples](#examples)
+	* [Change the Titanium SDK version](#change-the-titanium-sdk-version)
+	* [Disable analytics](#disable-analytics)
+	* [Add a new native module for android](#add-a-new-native-module-for-android)
+	* [Print the tiapp.xml from the tiapp object](#print-the-tiappxml-from-the-tiapp-object)
+* [API](#api)
+	* [load(file)](#loadfile)
+	* [parse(xmlString, filename)](#parsexmlstring-filename)
+	* [find()](#find)
+	* [toString()](#tostring)
+	* [write([file])](#writefile)
+	* [top-level elements](#top-level-elements)
+	* [getDeploymentTarget(platform)](#getdeploymenttargetplatform)
+	* [getDeploymentTargets()](#getdeploymenttargets)
+	* [setDeploymentTarget(platform, value)](#setdeploymenttargetplatform-value)
+	* [setDeploymentTargets(obj)](#setdeploymenttargetsobj)
+	* [getProperty(name)](#getpropertyname)
+	* [setProperty(name, [value], [type])](#setpropertyname-value-type)
+	* [removeProperty(name)](#removepropertyname)
+	* [getModules()](#getmodules)
+	* [setModule(id, [version], [platform])](#setmoduleid-version-platform)
+	* [removeModule(id, [platform])](#removemoduleid-platform)
+	* [getPlugins()](#getplugins)
+	* [setPlugin(id, [version])](#setpluginid-version)
+	* [removePlugin(id)](#removepluginid)
+	* [doc](#doc)
+* [Todo](#todo)
+* [📚Learn More](#learn-more)
+* [📣 Feedback](#-feedback)
 
 
 ## 📝 Description 
