@@ -6,10 +6,10 @@ update_configs:
     directory: "/"	
     update_schedule: "live"	
     default_assignees: 	
-    - "brentonhouse"	
+      - "brentonhouse"	
     default_labels:	
-    - "dependencies"	
-    - "dependabot"	
+      - "dependencies"	
+      - "dependabot"	
     allowed_updates:	
       - match:	
           dependency_name: "direct"	
@@ -30,6 +30,9 @@ update_configs:
       - match:
           dependency_name: "find-up"
           update_type: "semver:minor"
+      - match:
+          dependency_name: "@titanium/eslint-config"
+          update_type: "all"          
       - match:
           dependency_name: "@geek/eslint-config"
           update_type: "all"
