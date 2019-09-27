@@ -8,6 +8,8 @@
 # @titanium/tiapp-xml
 
 [![@titanium/tiapp-xml](https://img.shields.io/npm/v/@titanium/tiapp-xml.png)](https://www.npmjs.com/package/@titanium/tiapp-xml)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/tiapp-xml)](https://dependabot.com)
+
 
 > Modify your tiapp.xml file from Node.js.  This is a fork from tonylukasavage that primarily addresses the "." in the package name and module but leaving room to possibly add more enhancements.
 

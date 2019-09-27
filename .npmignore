@@ -6,3 +6,5 @@ test
 doc
 
 .eslint*
+
+.dependabot

@@ -22,7 +22,8 @@
 		"test:install-platform": "./cli/add-module.js my.test.module ios",
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
-		"test": "npm install --ignore-scripts && npm run list-files"
+		"test": "npm install --ignore-scripts && npm run list-files",
+		"prepublishOnly": "git pull && bump"
 	},
 	"bin": {
 		"tiapp-install-module": "./cli/install-module.js",
