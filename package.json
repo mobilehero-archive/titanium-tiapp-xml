@@ -38,7 +38,7 @@
 	},
 	"homepage": "https://github.com/brentonhouse/titanium-tiapp-xml#readme",
 	"dependencies": {
-		"find-up": "^4.1.0",
+		"find-up": "^5.0.0",
 		"lodash.get": "^4.4.2",
 		"pretty-data2": "~0.40.1",
 		"xmldom": "~0.1.19"
