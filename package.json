@@ -45,7 +45,7 @@
 	},
 	"devDependencies": {
 		"@geek/eslint-config": "0.0.12",
-		"eslint": "^7.9.0",
+		"eslint": "^7.10.0",
 		"should": "~13.2.3"
 	},
 	"engines": {
