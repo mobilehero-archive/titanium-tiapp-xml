@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Forked from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -17,12 +17,12 @@
 	],
 	"main": "index.js",
 	"scripts": {
-		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"test:install-all": "./cli/add-module.js my.test.module",
 		"test:install-platform": "./cli/add-module.js my.test.module ios",
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
-		"test": "npm install --ignore-scripts && npm run list-files",
+		"test": "npm install --ignore-scripts && npm run list",
 		"prepublishOnly": "git pull && bump"
 	},
 	"bin": "./cli/main.js",
