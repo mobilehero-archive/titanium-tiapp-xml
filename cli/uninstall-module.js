@@ -9,7 +9,7 @@ const get = require(`lodash.get`);
 // }
 // const cwd = args[args.length - 1];
 
-const tiappDir = require(`../lib/tiapp-dir`);
+const tiappDir = require(`../tiapp-dir`);
 const root = tiappDir.sync(process.env.INIT_CWD);
 
 
