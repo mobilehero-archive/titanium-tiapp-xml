@@ -8,11 +8,17 @@ if (!args.length && !process.env.npm_package_name) {
 	process.exit(1);
 }
 
+const [ cwd, name, platform, version ] = args;
+
+console.debug(`🦠  cwd: ${JSON.stringify(cwd, null, 2)}`);
+console.debug(`🦠  process.env.npm_package_name: ${JSON.stringify(process.env.npm_package_name, null, 2)}`);
+
 const tiappDir = require('../tiapp-dir');
-const root = tiappDir.sync(__dirname);
+// const root = tiappDir.sync(__dirname);
+const root = tiappDir.sync(cwd);
 
 if (!root) {
-	console.error(`Could not find tiapp.xml in directory tree: ${__dirname}`);
+	console.error(`Could not find tiapp.xml in directory tree: ${cwd}`);
 	process.exit(1);
 }
 
@@ -20,6 +26,8 @@ const tiapp_path = path.join(root, 'tiapp.xml');
 console.log(`Found tiapp.xml:  ${tiapp_path}`);
 
 const tiapp = require('..').load(path.join(root, 'tiapp.xml'));
+
+zzz();
 
 if (!args.length && process.env.npm_package_name) {
 	const platforms = getPlatforms();
