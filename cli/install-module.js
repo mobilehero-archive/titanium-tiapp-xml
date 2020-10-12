@@ -10,6 +10,7 @@ if (!args.length && !process.env.npm_package_name) {
 
 const [ cwd, name, platform, version ] = args;
 
+console.debug(`🦠  args: ${JSON.stringify(args, null, 2)}`);
 console.debug(`🦠  cwd: ${JSON.stringify(cwd, null, 2)}`);
 console.debug(`🦠  process.env.npm_package_name: ${JSON.stringify(process.env.npm_package_name, null, 2)}`);
 
