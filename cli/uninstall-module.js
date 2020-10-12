@@ -7,12 +7,13 @@ if (!args.length && !process.env.npm_package_name) {
 	console.error('No parameters specified and not run from npm package script');
 	process.exit(1);
 }
+const cwd = args[args.length - 1];
 
 const tiappDir = require('../lib/tiapp-dir');
-const root = tiappDir.sync(__dirname);
+const root = tiappDir.sync(cwd);
 
 if (!root) {
-	console.error(`Could not find tiapp.xml in directory tree: ${__dirname}`);
+	console.error(`Could not find tiapp.xml in directory tree: ${cwd}`);
 	process.exit(1);
 }
 
@@ -21,7 +22,7 @@ console.log(`Found tiapp.xml:  ${tiapp_path}`);
 
 const tiapp = require('..').load(path.join(root, 'tiapp.xml'));
 
-if (!args.length && process.env.npm_package_name) {
+if (process.env.npm_package_name) {
 	const platforms = getPlatforms();
 
 	platforms.forEach(platform => {
@@ -31,9 +32,11 @@ if (!args.length && process.env.npm_package_name) {
 	});
 	tiapp.write();
 
-} else if (args.length) {
-	removeModule(args[0], args[1]);
-}
+} 
+
+// else if (args.length) {
+// 	removeModule(args[0], args[1]);
+// }
 
 function removeModule(name, platform) {
 	console.error(`removing module.  name: ${name} platform: ${platform}`);

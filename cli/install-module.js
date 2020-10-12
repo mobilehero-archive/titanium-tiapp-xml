@@ -8,11 +8,7 @@ if (!args.length && !process.env.npm_package_name) {
 	process.exit(1);
 }
 
-const [ cwd, name, platform, version ] = args;
-
-console.debug(`🦠  args: ${JSON.stringify(args, null, 2)}`);
-console.debug(`🦠  cwd: ${JSON.stringify(cwd, null, 2)}`);
-console.debug(`🦠  process.env.npm_package_name: ${JSON.stringify(process.env.npm_package_name, null, 2)}`);
+const cwd = args[args.length - 1];
 
 const tiappDir = require('../tiapp-dir');
 // const root = tiappDir.sync(__dirname);
@@ -28,9 +24,7 @@ console.log(`Found tiapp.xml:  ${tiapp_path}`);
 
 const tiapp = require('..').load(path.join(root, 'tiapp.xml'));
 
-zzz();
-
-if (!args.length && process.env.npm_package_name) {
+if (process.env.npm_package_name) {
 	const platforms = getPlatforms();
 
 	platforms.forEach(platform => {
@@ -46,11 +40,13 @@ if (!args.length && process.env.npm_package_name) {
 	});
 	tiapp.write();
 
-} else if (args.length) {
-	removeModule(args[0], args[1]);
-	addModule(args[0], args[1], args[2]);
-	tiapp.write();
 }
+
+// else if (args.length) {
+// 	removeModule(args[0], args[1]);
+// 	addModule(args[0], args[1], args[2]);
+// 	tiapp.write();
+// }
 
 function addModule(name, platform, version) {
 
