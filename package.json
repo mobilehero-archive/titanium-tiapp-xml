@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Forked from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -25,10 +25,7 @@
 		"test": "npm install --ignore-scripts && npm run list-files",
 		"prepublishOnly": "git pull && bump"
 	},
-	"bin": {
-		"tiapp-install-module": "./cli/install-module.js",
-		"tiapp-uninstall-module": "./cli/uninstall-module.js"
-	},
+	"bin": "./cli/main.js",
 	"repository": {
 		"type": "git",
 		"url": "github:brentonhouse/titanium-tiapp-xml"

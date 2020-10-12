@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 const path = require(`path`);
-const args = process.argv.slice(2);
+// const args = process.argv.slice(2);
 const get = require(`lodash.get`);
 
-if (!args.length && !process.env.npm_package_name) {
-	console.error(`No parameters specified and not run from npm package script`);
-	process.exit(1);
-}
+// if (!args.length && !process.env.npm_package_name) {
+// 	console.error(`No parameters specified and not run from npm package script`);
+// 	process.exit(1);
+// }
 
-const cwd = args[args.length - 1];
+// const cwd = args[args.length - 1];
 
 const tiappDir = require(`../tiapp-dir`);
 // const root = tiappDir.sync(__dirname);
-const root = tiappDir.sync(cwd);
+const root = tiappDir.sync(process.env.INIT_CWD);
 
 if (!root) {
-	console.error(`Could not find tiapp.xml in directory tree: ${cwd}`);
+	console.error(`Could not find tiapp.xml in directory tree: ${process.env.INIT_CWD}`);
 	process.exit(1);
 }
 
