@@ -1,16 +1,16 @@
 #!/usr/bin/env node
-const path = require('path');
+const path = require(`path`);
 const args = process.argv.slice(2);
-const get = require('lodash.get');
+const get = require(`lodash.get`);
 
 if (!args.length && !process.env.npm_package_name) {
-	console.error('No parameters specified and not run from npm package script');
+	console.error(`No parameters specified and not run from npm package script`);
 	process.exit(1);
 }
 
 const cwd = args[args.length - 1];
 
-const tiappDir = require('../tiapp-dir');
+const tiappDir = require(`../tiapp-dir`);
 // const root = tiappDir.sync(__dirname);
 const root = tiappDir.sync(cwd);
 
@@ -19,10 +19,10 @@ if (!root) {
 	process.exit(1);
 }
 
-const tiapp_path = path.join(root, 'tiapp.xml');
+const tiapp_path = path.join(root, `tiapp.xml`);
 console.log(`Found tiapp.xml:  ${tiapp_path}`);
 
-const tiapp = require('..').load(path.join(root, 'tiapp.xml'));
+const tiapp = require(`..`).load(path.join(root, `tiapp.xml`));
 
 if (process.env.npm_package_name) {
 	const platforms = getPlatforms();
@@ -52,11 +52,11 @@ function addModule(name, platform, version) {
 
 	console.error(`installing module.  name: ${name} platform: ${platform} version: ${version}`);
 	if (platform && version) {
-		tiapp.setModule(name, { platform: platform, version: version  });
+		tiapp.setModule(name, { platform, version  });
 	} else if (!platform) {
-		tiapp.setModule(name, { version: version  });
+		tiapp.setModule(name, { version  });
 	} else if (!version) {
-		tiapp.setModule(name, { platform: platform });
+		tiapp.setModule(name, { platform });
 	}
 }
 
@@ -76,15 +76,15 @@ function getPlatforms() {
 	const keys = Object.keys(process.env);
 
 	if (keys.some(key => {
-		return key.startsWith('npm_package_titanium_platform_ios');
+		return key.startsWith(`npm_package_titanium_platform_ios`);
 	})) {
-		platforms.push('ios');
+		platforms.push(`ios`);
 	}
 
 	if (keys.some(key => {
-		return key.startsWith('npm_package_titanium_platform_android');
+		return key.startsWith(`npm_package_titanium_platform_android`);
 	})) {
-		platforms.push('android');
+		platforms.push(`android`);
 	}
 
 	if (!platforms.length) {
