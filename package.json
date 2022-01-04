@@ -1,7 +1,7 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.6",
-	"description": "Titanium tiapp.xml parsing and manipulation API - Forked from tonylukasavage",
+	"version": "1.0.7",
+	"description": "Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium apps",
 	"license": "MIT",
 	"author": {
 		"name": "Tony Lukasavage",
