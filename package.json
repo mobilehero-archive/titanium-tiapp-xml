@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"description": "Titanium tiapp.xml parsing and manipulation API - Forked from tonylukasavage",
 	"license": "MIT",
 	"author": {
@@ -23,7 +23,7 @@
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
 		"test": "npm install --ignore-scripts && npm run list",
-		"prepublishOnly": "git pull && bump"
+		"prepublishOnly": "git pull && bump insane"
 	},
 	"bin": "./cli/main.js",
 	"repository": {
@@ -33,7 +33,7 @@
 	"bugs": {
 		"url": "https://github.com/brentonhouse/titanium-tiapp-xml/issues"
 	},
-	"homepage": "https://github.com/brentonhouse/titanium-tiapp-xml#readme",
+	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"dependencies": {
 		"find-up": "^5.0.0",
 		"lodash.get": "^4.4.2",
@@ -61,6 +61,15 @@
 		"ipad",
 		"tiapp",
 		"xml",
+		"plugin",
+		"amplify",
+		"api-builder",
+		"appcelerator-titanium",
+		"titanium-sdk",
+		"titanium-mobile",
+		"titanium-module",
+		"axway-sdk",
+		"axway-amplify",
 		"brenton-house"
 	],
 	"titanium": {
