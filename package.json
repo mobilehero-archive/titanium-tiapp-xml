@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium apps",
 	"license": "MIT",
 	"author": {
@@ -36,13 +36,13 @@
 	},
 	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"dependencies": {
-		"find-up": "^5.0.0",
+		"@xmldom/xmldom": "^0.8.0",
+		"find-up": "^6.2.0",
 		"lodash.get": "^4.4.2",
-		"pretty-data2": "~0.40.1",
-		"xmldom": "~0.3.0"
+		"pretty-data2": "~0.40.1"
 	},
 	"devDependencies": {
-		"@geek/eslint-config": "0.0.16",
+		"@geek/eslint-config": "1.0.2",
 		"eslint": "^7.11.0",
 		"should": "~13.2.3"
 	},

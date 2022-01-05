@@ -1,16 +1,16 @@
-const xmldom = require('xmldom');
+const xmldom = require(`@xmldom/xmldom`);
 
 // TODO: trim
 exports.getNodeText = function getNodeText(node) {
-	if (!node) { return ''; }
+	if (!node) { return ``; }
 	const serializer = new xmldom.XMLSerializer();
-	let str = '';
+	let str = ``;
 	for (let c = 0; c < node.childNodes.length; c++) {
 		if (node.childNodes[c].nodeType === 3) {
 			str += serializer.serializeToString(node.childNodes[c]);
 		}
 	}
-	return str.replace(/\&amp;/g, '&');
+	return str.replace(/\&amp;/g, `&`);
 };
 
 exports.setNodeText = function setNodeText(node, val) {
