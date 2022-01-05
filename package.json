@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium apps",
 	"license": "MIT",
 	"author": {
@@ -23,7 +23,8 @@
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
 		"test": "npm install --ignore-scripts && npm run list",
-		"prepublishOnly": "git pull && bump insane"
+		"prepublishOnly": "git pull && npm test && bump insane",
+		"prepublishOnly2": "git pull && npm test && npm audit fix && bump insane"
 	},
 	"bin": "./cli/main.js",
 	"repository": {
