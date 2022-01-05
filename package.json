@@ -1,7 +1,7 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.10",
-	"description": "Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium apps",
+	"version": "1.0.11",
+	"description": "⭐  Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium SDK",
 	"license": "MIT",
 	"author": {
 		"name": "Tony Lukasavage",
@@ -42,8 +42,8 @@
 		"pretty-data2": "~0.40.1"
 	},
 	"devDependencies": {
-		"@geek/eslint-config": "1.0.2",
-		"eslint": "^7.11.0",
+		"@geek/eslint-config": "1.0.3",
+		"eslint": "^8.6.0",
 		"should": "~13.2.3"
 	},
 	"engines": {
