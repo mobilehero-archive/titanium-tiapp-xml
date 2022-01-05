@@ -36,7 +36,7 @@
 	},
 	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"dependencies": {
-		"find-up": "^5.0.0",
+		"find-up": "^6.2.0",
 		"lodash.get": "^4.4.2",
 		"pretty-data2": "~0.40.1",
 		"xmldom": "~0.3.0"
