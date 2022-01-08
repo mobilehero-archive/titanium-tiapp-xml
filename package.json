@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/tiapp-xml",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "⭐  Axway Amplify module to modify app config - tiapp.xml for Appcelerator Titanium SDK",
 	"license": "MIT",
 	"author": {
@@ -17,22 +17,24 @@
 	],
 	"main": "index.js",
 	"scripts": {
-		"list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"test:install-all": "./cli/add-module.js my.test.module",
 		"test:install-platform": "./cli/add-module.js my.test.module ios",
 		"test:install-platform-version": "./cli/add-module.js my.test.module android 1.2.3",
 		"test:uninstall-all": "./cli/remove-module.js my.test.module",
-		"test": "npm install --ignore-scripts && npm run list",
-		"prepublishOnly2": "git pull && npm test && bump insane",
-		"prepublishOnly": "git pull && npm test && npm audit fix && bump insane"
+		"lint": "eslint . --fix",
+		"list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"prep": "npm install --ignore-scripts",
+		"test": "npm run prep",
+		"prepublishOnly": "git pull && npm test && bump insane",
+		"prepublishOnly2": "git pull && npm test && npm audit fix && bump insane"
 	},
 	"bin": "./cli/main.js",
 	"repository": {
 		"type": "git",
-		"url": "github:brentonhouse/titanium-tiapp-xml"
+		"url": "github:mobilehero-archive/titanium-tiapp-xml"
 	},
 	"bugs": {
-		"url": "https://github.com/brentonhouse/titanium-tiapp-xml/issues"
+		"url": "https://github.com/mobilehero-archive/titanium-tiapp-xml/issues"
 	},
 	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"dependencies": {
