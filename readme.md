@@ -1,3 +1,5 @@
+[//]: # (header-start)
+
 <a href="https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de">
 	<h1 align="center">
 	🪦 RIP Axway Amplify Titanium (2010 - 2022)
@@ -24,13 +26,13 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-
+[//]: # (header-end)
 
 
 # @titanium/tiapp-xml
 
 [![@titanium/tiapp-xml](https://img.shields.io/npm/v/@titanium/tiapp-xml.png)](https://www.npmjs.com/package/@titanium/tiapp-xml)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/tiapp-xml)](https://dependabot.com)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=mobilehero-archive/tiapp-xml)](https://dependabot.com)
 
 
 > Modify your tiapp.xml file from Node.js.  This is a fork from tonylukasavage that primarily addresses the "." in the package name and module but leaving room to possibly add more enhancements.
